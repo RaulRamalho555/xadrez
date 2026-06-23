@@ -1,15 +1,41 @@
 import chess.ChessMatch;
 import chess.ChessPiece;
+import chess.ChessPosition;
+import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
 
+        Scanner sc = new Scanner(System.in);
+
         ChessMatch chessMatch = new ChessMatch();
 
-        ChessPiece[][] pieces = chessMatch.getPieces();
+        while (true) {
 
-        printBoard(pieces);
+            printBoard(chessMatch.getPieces());
+
+            System.out.print("Origem: ");
+            String source = sc.nextLine();
+
+            System.out.print("Destino: ");
+            String target = sc.nextLine();
+
+            ChessPosition sourcePosition = new ChessPosition(
+                source.charAt(0),
+                Integer.parseInt(source.substring(1))
+            );
+
+            ChessPosition targetPosition = new ChessPosition(
+                target.charAt(0),
+                Integer.parseInt(target.substring(1))
+            );
+
+            chessMatch.performChessMove(
+                sourcePosition.toPosition(),
+                targetPosition.toPosition()
+            );
+        }
     }
 
     public static void printBoard(ChessPiece[][] pieces) {
