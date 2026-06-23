@@ -7,13 +7,21 @@ import chess.Color;
 
 public class King extends ChessPiece {
 
+    private ChessMatch chessMatch;
+
     public King(Board board, Color color, ChessMatch chessMatch) {
         super(board, color);
+        this.chessMatch = chessMatch; // Guardando a referência
     }
 
     @Override
     public String toString() {
         return "K";
+    }
+
+    private boolean testRookCastling(Position position) {
+        ChessPiece p = (ChessPiece)getBoard().piece(position);
+        return p != null && p instanceof Rook && p.getColor() == getColor() && p.getMoveCount() == 0;
     }
 
     private boolean canMove(Position position) {
@@ -59,5 +67,8 @@ public class King extends ChessPiece {
         if (getBoard().positionExists(p) && canMove(p)) mat[p.getRow()][p.getColumn()] = true;
 
         return mat;
+
+
+        }
     }
 }
