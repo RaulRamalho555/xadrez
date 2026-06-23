@@ -17,7 +17,8 @@ public class Program {
         ChessMatch chessMatch = new ChessMatch();
         List<ChessPiece> captured = new ArrayList<>();
 
-        while (true) {
+        // O loop agora para quando checkMate for true
+        while (!chessMatch.getCheckMate()) {
             try {
                 UI.clearScreen();
                 UI.printMatch(chessMatch, captured);
@@ -26,7 +27,6 @@ public class Program {
                 System.out.print("Source (Origem): ");
                 ChessPosition source = UI.readChessPosition(sc);
 
-                // Mostra o tabuleiro com o fundo azul nas posições possíveis
                 boolean[][] possibleMoves = chessMatch.possibleMoves(source);
                 UI.clearScreen();
                 UI.printBoard(chessMatch.getPieces(), possibleMoves);
@@ -50,5 +50,9 @@ public class Program {
                 sc.nextLine();
             }
         }
+
+        // Imprime a tela final quando o jogo acaba
+        UI.clearScreen();
+        UI.printMatch(chessMatch, captured);
     }
 }
