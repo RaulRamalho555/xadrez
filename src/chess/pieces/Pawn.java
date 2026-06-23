@@ -13,9 +13,6 @@ public class Pawn extends ChessPiece {
         super(board, color);
         this.chessMatch = chessMatch;
     }
-    public Pawn(Board board, Color color, ChessMatch chessMatch) {
-        super(board, color);
-    }
 
     @Override
     public String toString() {
